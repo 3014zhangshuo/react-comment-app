@@ -23,6 +23,7 @@ class CommentApp extends Component {
   _saveComments(comments) {
     localStorage.setItem("comments", JSON.stringify(comments))
   }
+  
 
   handleSubmitComment(comment) {
     if (!comment) return 
