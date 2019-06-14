@@ -13,6 +13,25 @@ class CommentInput extends Component {
     this.textarea.focus()
   }
 
+  componentWillMount() {
+    this._loadUsername()
+  }
+
+  _loadUsername() {
+    const username = localStorage.getItem("username")
+    if (username) {
+      this.setState({ username: username })
+    }
+  }
+
+  _saveUsername(username) {
+    localStorage.setItem("username", username)
+  }
+
+  handleUsernameBlur(event) {
+    this._saveUsername(event.target.value)
+  }
+
   handleUsernameChange(event) {
     this.setState({
       username: event.target.value
@@ -40,7 +59,8 @@ class CommentInput extends Component {
           <span className="comment-field-name">用户名：</span>
           <div className="comment-field-input">
             <input 
-              value={this.state.username} 
+              value={this.state.username}
+              onBlur={this.handleUsernameBlur.bind(this)} 
               onChange={this.handleUsernameChange.bind(this)}/>
           </div>
         </div>
